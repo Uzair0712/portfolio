@@ -8,7 +8,7 @@ import { urlFor, client } from "../../client";
 import "./Work.scss";
 function Work() {
   const [works, setWorks] = useState([]);
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeFilter, setActiveFilter] = useState("React JS");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [filterWork, setFilterWork] = useState([]);
 
@@ -33,7 +33,7 @@ function Work() {
       .fetch(query)
       .then((data) => {
         setWorks(data);
-        setFilterWork(data);
+        setFilterWork(data.filter((work) => work.tags.includes(activeFilter)));
       })
       .catch((err) => console.log(err));
   }, []);
